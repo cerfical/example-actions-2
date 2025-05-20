@@ -20,6 +20,12 @@ jobs:
               id: release
               with:
                   release-type: go
+            - name: "Check if release created"
+              if: ${{ steps.release.outputs.release_created }}
+              run: echo "Release was created!"
+            - name: "Check if release created"
+              if: ${{ !steps.release.outputs.release_created }}
+              run: echo "Release was not created!"
     build:
         name: Build for ${{ matrix.os }}
         runs-on: ${{ matrix.os }}
