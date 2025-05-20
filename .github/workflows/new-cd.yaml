@@ -12,6 +12,7 @@ name: release-please
 
 jobs:
     release-please:
+        name: Release Please
         runs-on: ubuntu-latest
         outputs:
             release_created: ${{ steps.release.outputs.release_created }}
@@ -27,7 +28,10 @@ jobs:
                   echo "Release tag name is ${{ steps.release.outputs.tag_name }}"
             - name: "Check if release created"
               if: ${{ !steps.release.outputs.release_created }}
-              run: echo "Release was not created!"
+              run: |
+                  echo "Release was not created!"
+                  echo "Release tag name is ${{ steps.release.outputs.tag_name }}"
+
     build:
         name: Build for ${{ matrix.os }}
         runs-on: ${{ matrix.os }}
