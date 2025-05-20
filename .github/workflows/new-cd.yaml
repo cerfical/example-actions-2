@@ -78,7 +78,7 @@ jobs:
                   output_file="./dist/app-${platform}"
                   case "$system" in
                   *win*)
-                      7zp "${output_file}.zip" build
+                      7z a "${output_file}.zip" ./build/*
                       ;;
                   *linux*)
                       cd build && tar -vczf "../${output_file}.tar.gz" * && cd -
