@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.6](https://github.com/cerfical/example-actions-2/compare/v0.1.5...v0.1.6) (2025-05-20)
+
+
+### Bug Fixes
+
+* fix cd ([bfe0405](https://github.com/cerfical/example-actions-2/commit/bfe040572bdbbff998c92b537cf3ff84b800f926))
+
 ## [0.1.5](https://github.com/cerfical/example-actions-2/compare/v0.1.4...v0.1.5) (2025-05-20)
 
 
