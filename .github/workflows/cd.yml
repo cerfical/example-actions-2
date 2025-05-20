@@ -48,6 +48,7 @@ jobs:
               run: go mod download
 
             - name: Build and archive
+              shell: bash
               run: |
                   arch=$(go env GOARCH)
                   system=$(go env GOOS)
@@ -58,7 +59,7 @@ jobs:
                   mkdir build && cd build
                   for cmd in ../cmd/*/; do
                       cmd_name=$(basename "$cmd")
-                      echo "Building ${cmd_name}"
+                      echo Building ${cmd_name}
 
                       # Let go build decide on executable name and extension
                       go build ${cmd}
@@ -67,16 +68,18 @@ jobs:
 
                   mkdir dist
 
-                  output_file="./dist/app-${platform}"
+                  output_file="app-${platform}"
                   case "$system" in
                   *win*)
-                      7z a "${output_file}.zip" ./build/*
+                      echo Creating ${output_file}.zip
+                      7z a "./dist/${output_file}.zip" ./build/*
                       ;;
                   *linux*)
-                      cd build && tar -vczf "../${output_file}.tar.gz" *
+                      echo Creating ${output_file}.tar.gz
+                      cd build && tar -vczf "../dist/${output_file}.tar.gz" *
                       ;;
                   *)
-                      echo "Unknown platform: ${platform}"
+                      echo Unknown platform: ${platform}
                       exit 1
                       ;;
                   esac
