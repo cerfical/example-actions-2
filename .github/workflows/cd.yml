@@ -76,7 +76,7 @@ jobs:
                       ;;
                   *linux*)
                       echo Creating ${output_file}.tar.gz
-                      cd build && tar -vczf "../dist/${output_file}.tar.gz" *
+                      cd build && tar -czf "../dist/${output_file}.tar.gz" *
                       ;;
                   *)
                       echo Unknown platform: ${platform}
