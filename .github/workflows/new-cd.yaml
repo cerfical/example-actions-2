@@ -22,7 +22,9 @@ jobs:
                   release-type: go
             - name: "Check if release created"
               if: ${{ steps.release.outputs.release_created }}
-              run: echo "Release was created!"
+              run: |
+                  echo "Release was created!"
+                  echo "Release tag name is ${{ steps.release.outputs.tag_name }}"
             - name: "Check if release created"
               if: ${{ !steps.release.outputs.release_created }}
               run: echo "Release was not created!"
