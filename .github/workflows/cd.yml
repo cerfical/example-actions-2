@@ -1,12 +1,35 @@
-name: CD
-
 on:
-    release:
-        types: [published]
+    push:
+        branches:
+            - main
 
+permissions:
+    # Required for release-please to create pull requests and labels
+    pull-requests: write
+    issues: write
+
+    # Required for action-gh-release to attach build assets
+    contents: write
+
+name: CD
 jobs:
+    release-please:
+        name: Release Please
+        runs-on: ubuntu-latest
+        outputs:
+            release-created: ${{ steps.release.outputs.release_created }}
+            tag-name: ${{ steps.release.outputs.tag_name  }}
+
+        steps:
+            - uses: googleapis/release-please-action@v4
+              id: release
+              with:
+                  release-type: go
+
     build:
         name: Build for ${{ matrix.os }}
+        if: ${{ needs.release-please.outputs.release-created }}
+        needs: release-please
         runs-on: ${{ matrix.os }}
         strategy:
             matrix:
@@ -24,70 +47,42 @@ jobs:
             - name: Install dependencies
               run: go mod download
 
-            - name: Build
-              shell: bash
+            - name: Build and archive
               run: |
-                  ARCH=$(go env GOARCH)
-                  OS=$(go env GOOS)
-                  BUILD_DIR=build/${OS}/${ARCH}
+                  arch=$(go env GOARCH)
+                  system=$(go env GOOS)
+                  platform=${arch}-${system}
 
-                  mkdir -p ${BUILD_DIR} && cd ${BUILD_DIR}
-                  for cmd in ../../../cmd/*/; do
+                  echo "Building for ${platform}"
+
+                  mkdir build && cd build
+                  for cmd in ../cmd/*/; do
                       cmd_name=$(basename "$cmd")
-                      echo "Building ${cmd_name} for ${ARCH}-${OS}"
+                      echo "Building ${cmd_name}"
 
+                      # Let go build decide on executable name and extension
                       go build ${cmd}
                   done
+                  cd ..
 
-            - name: Upload build artifacts
-              uses: actions/upload-artifact@v4
-              with:
-                  name: build-${{ matrix.os }}
-                  path: build/**/*
-
-    release:
-        name: Create release
-        needs: build
-        runs-on: ubuntu-latest
-
-        steps:
-            - name: Download build artifacts
-              uses: actions/download-artifact@v4
-              with:
-                  merge-multiple: true
-                  path: ./build
-
-            - name: Archive build artifacts
-              run: |
                   mkdir dist
 
-                  for system_dir in ./build/*/; do
-                      system=$(basename "$system_dir" | tr '[:upper:]' '[:lower:]')
-
-                      for platform_dir in ${system_dir}/*/; do
-                          arch=$(basename "$platform_dir" | tr '[:upper:]' '[:lower:]')
-
-                          platform=${arch}-${system}
-                          echo "Release platform: ${platform}"
-
-                          output_file="./dist/app-${platform}"
-                          case "$system" in
-                              *win*)
-                                  zip -jr "${output_file}.zip" "$platform_dir"
-                                  ;;
-                              *linux*)
-                                  cd ${platform_dir} && tar -vczf "../../../${output_file}.tar.gz" * && cd -
-                                  ;;
-                              *)
-                                  echo "Unknown platform: ${platform}"
-                                  exit 1
-                                  ;;
-                          esac
-                      done
-                  done
+                  output_file="./dist/app-${platform}"
+                  case "$system" in
+                  *win*)
+                      7z a "${output_file}.zip" ./build/*
+                      ;;
+                  *linux*)
+                      cd build && tar -vczf "../${output_file}.tar.gz" *
+                      ;;
+                  *)
+                      echo "Unknown platform: ${platform}"
+                      exit 1
+                      ;;
+                  esac
 
             - name: Upload release
               uses: softprops/action-gh-release@v2
               with:
-                  generate_release_notes: true
+                  tag_name: ${{ needs.release-please.outputs.tag-name }}
                   files: ./dist/**/*
