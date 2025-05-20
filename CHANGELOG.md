@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.1.0](https://github.com/cerfical/example-actions-2/compare/v0.0.1...v0.1.0) (2025-05-20)
+
+
+### Features
+
+* add feature [#9](https://github.com/cerfical/example-actions-2/issues/9) ([2830a9f](https://github.com/cerfical/example-actions-2/commit/2830a9f33993a0dbf676041cd1f1deef86270f22))
+* add initial files ([edda199](https://github.com/cerfical/example-actions-2/commit/edda199b37c19d794f97233183a3d01a7c5a159c))
+* add new feature [#4](https://github.com/cerfical/example-actions-2/issues/4) ([c165e39](https://github.com/cerfical/example-actions-2/commit/c165e39a88f8f49386791f68f3be22864a68fdc4))
+* add new feature [#5](https://github.com/cerfical/example-actions-2/issues/5) ([54b9dca](https://github.com/cerfical/example-actions-2/commit/54b9dca152d8efd97579088f55c40dc023a096dc))
+* new feature [#1](https://github.com/cerfical/example-actions-2/issues/1) ([16d6d06](https://github.com/cerfical/example-actions-2/commit/16d6d06fabea5a51c0d820c2873960fc76b0109f))
+
+
+### Bug Fixes
+
+* add actions ([207ce0f](https://github.com/cerfical/example-actions-2/commit/207ce0f7874bcce20543921264fc2f4f3aadd4e0))
+* fix cd ([f1be133](https://github.com/cerfical/example-actions-2/commit/f1be13378c473943c2067f3ed62adf16d5cc1c03))
+* fix cd ([1e0dbc2](https://github.com/cerfical/example-actions-2/commit/1e0dbc253911da29a932767f523b54f07cb45530))
+* fix cd [#2](https://github.com/cerfical/example-actions-2/issues/2) ([cb4ce0d](https://github.com/cerfical/example-actions-2/commit/cb4ce0d609bdffe66948785c1fa2eb18dc442559))
+
 ## [0.1.0](https://github.com/cerfical/example-actions/compare/v0.0.36...v0.1.0) (2025-05-20)
 
 
