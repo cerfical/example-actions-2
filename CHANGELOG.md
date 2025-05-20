@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.4](https://github.com/cerfical/example-actions-2/compare/v0.1.3...v0.1.4) (2025-05-20)
+
+
+### Bug Fixes
+
+* simplify cd scripts ([1186d77](https://github.com/cerfical/example-actions-2/commit/1186d772035338069c40932c1e63d4b624f11e9b))
+
 ## [0.1.3](https://github.com/cerfical/example-actions-2/compare/v0.1.2...v0.1.3) (2025-05-20)
 
 
