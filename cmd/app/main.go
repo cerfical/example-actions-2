@@ -10,8 +10,6 @@ import (
 
 func main() {
 	log.Info().Msg("Starting the application, now!")
-	log.Info().Msg("Starting the application, now #2!")
-	log.Info().Msg("Starting the application, now #3!")
 	greet(os.Stdout)
 }
 
