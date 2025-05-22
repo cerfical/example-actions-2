@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.8](https://github.com/cerfical/example-actions-2/compare/v0.1.7...v0.1.8) (2025-05-22)
+
+
+### Bug Fixes
+
+* remove useless code ([12c5118](https://github.com/cerfical/example-actions-2/commit/12c51184812c24d45e50eef59c4e0d61d6469256))
+
 ## [0.1.7](https://github.com/cerfical/example-actions-2/compare/v0.1.6...v0.1.7) (2025-05-20)
 
 
