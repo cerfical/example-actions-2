@@ -11,6 +11,8 @@ import (
 func main() {
 	log.Info().Msg("Starting the application, now!")
 	log.Info().Msg("Starting the application, now!")
+	log.Info().Msg("Starting the application, now!")
+	log.Info().Msg("Starting the application, now!")
 	greet(os.Stdout)
 }
 
