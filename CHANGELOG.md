@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0](https://github.com/cerfical/example-actions-2/compare/v0.7.0...v1.0.0) (2025-05-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* **main:** new feature
+
+### Features
+
+* **main:** new feature ([a10f275](https://github.com/cerfical/example-actions-2/commit/a10f275968191da78db5921cd4ba1d1e4e44ab16))
+
 ## [0.7.0](https://github.com/cerfical/example-actions-2/compare/v0.6.0...v0.7.0) (2025-05-23)
 
 
