@@ -7,7 +7,7 @@ jobs:
         runs-on: ubuntu-latest
 
         permissions:
-            contents: read
+            pull-requests: write
 
         outputs:
             release-created: ${{ steps.release.outputs.release_created }}
