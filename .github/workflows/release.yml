@@ -8,6 +8,7 @@ jobs:
 
         permissions:
             pull-requests: write
+            contents: write
 
         outputs:
             release-created: ${{ steps.release.outputs.release_created }}
