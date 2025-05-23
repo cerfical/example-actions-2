@@ -37,7 +37,7 @@ jobs:
               with:
                   go-version-file: go.mod
 
-            - name: Download dependencies
+            - name: Install dependencies
               run: go mod download
 
             - name: Run tests
@@ -48,3 +48,28 @@ jobs:
               with:
                   file: coverage.out
                   format: golang
+
+    commit-lint:
+        name: Lint Commit Messages
+        runs-on: ubuntu-latest
+
+        permissions:
+            contents: read
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Setup Node
+              uses: actions/setup-node@v4
+
+            - name: Install commitlint
+              run: npm install @commitlint/cli @commitlint/config-conventional
+
+            - name: Validate last commit
+              if: github.event_name == 'push'
+              run: npx commitlint --last --verbose
+
+            - name: Validate PR commits
+              if: github.event_name == 'pull_request'
+              run: npx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
