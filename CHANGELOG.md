@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.1](https://github.com/cerfical/example-actions-2/compare/v0.3.0...v0.3.1) (2025-05-23)
+
+
+### Bug Fixes
+
+* fix cd ([d126d83](https://github.com/cerfical/example-actions-2/commit/d126d832ba290a2e2238ee8e8d012b0df4b64295))
+* fix cd ([ea95476](https://github.com/cerfical/example-actions-2/commit/ea9547602702c712e8e616c1db722b992266cb5e))
+
 ## [0.3.0](https://github.com/cerfical/example-actions-2/compare/v0.2.0...v0.3.0) (2025-05-23)
 
 
