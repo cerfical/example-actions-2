@@ -7,8 +7,9 @@ on:
     workflow_dispatch:
 
 permissions:
-    # Required for release-please to create pull requests
+    # Required for release-please to create pull requests and labels
     pull-requests: write
+    issues: write
 
     # Required for action-gh-release to attach build assets
     contents: write
