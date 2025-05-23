@@ -85,4 +85,6 @@ jobs:
                   esac
 
             - name: Upload release
+              env:
+                  GH_TOKEN: ${{ github.token }}
               run: gh release upload ${{ needs.release-please.outputs.tag-name }} ./dist/**/*
