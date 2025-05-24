@@ -1,5 +1,5 @@
 name: CI
-on: [pull_request, workflow_dispatch]
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
     lint:
@@ -60,16 +60,40 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v4
 
-            - name: Setup Node
-              uses: actions/setup-node@v4
+            - name: Validate commits
+              run: |
+                  COMMIT_TYPES="feat|fix|docs|style|refactor|test|chore|ci"
 
-            - name: Install commitlint
-              run: npm install @commitlint/cli @commitlint/config-conventional
+                  case ${{ github.event_name }} in
+                  "pull_request")
+                      # Check commits in PR
+                      base=${{ github.event.pull_request.base.sha }}
+                      head=${{ github.event.pull_request.head.sha }}
+                      msgs=$(git log --pretty=format:%s "${base}..${head}")
+                      ;;
+                  "push")
+                      # Check only last commit
+                      msgs=$(git log --pretty=format:%s -1)
+                      ;;
+                  *)
+                      # Check the whole commit history
+                      msgs=$(git log --pretty=format:%s)
+                      ;;
+                  esac
 
-            - name: Validate last commit
-              if: github.event_name == 'push'
-              run: npx commitlint --last --verbose
+                  valid=1
+                  while read -r msg; do
+                      if ! grep -qE "^(${COMMIT_TYPES})(\([^)]+\))?(!)?: .+" <<< "$msg"; then
+                          echo "❌ [FAIL] $msg"
+                          valid=0
+                      else
+                          echo "✅ [OK] $msg"
+                      fi
+                  done <<< "$msgs"
 
-            - name: Validate PR commits
-              if: github.event_name == 'pull_request'
-              run: npx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
+                  if [ "$valid" -ne 1 ]; then
+                      echo "❌ [FAIL] Commit messages must follow Conventional Commits: 'type(scope): message'"
+                      exit 1
+                  fi
+
+                  echo "✅ [OK] All commit messages are valid"
