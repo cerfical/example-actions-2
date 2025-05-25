@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.1.0](https://github.com/cerfical/example-actions-2/compare/v1.0.0...v1.1.0) (2025-05-25)
+
+
+### Features
+
+* new feature ([d3dab85](https://github.com/cerfical/example-actions-2/commit/d3dab851c18bdd238d32c205017e68110b2d3000))
+* new feature ([c16be76](https://github.com/cerfical/example-actions-2/commit/c16be7646e1878712f25294774a8eea47189e24f))
+* new feature ([6a6ac95](https://github.com/cerfical/example-actions-2/commit/6a6ac95c74d536bbf348f83a633c8667187262cc))
+* new feature ([f9e30a3](https://github.com/cerfical/example-actions-2/commit/f9e30a36002246d0feea4ce50d4543537599fcf3))
+* new feature ([#35](https://github.com/cerfical/example-actions-2/issues/35)) ([6a6ac95](https://github.com/cerfical/example-actions-2/commit/6a6ac95c74d536bbf348f83a633c8667187262cc))
+* **readme:** update readme ([dfee2e8](https://github.com/cerfical/example-actions-2/commit/dfee2e81d31afc047b9a4701fd69e0150c3cae13))
+
+
+### Bug Fixes
+
+* fix readme ([49ae165](https://github.com/cerfical/example-actions-2/commit/49ae165f828b4f2ecac8d2602d1f0a36b104fa2e))
+
 ## [1.0.0](https://github.com/cerfical/example-actions-2/compare/v0.7.0...v1.0.0) (2025-05-23)
 
 
